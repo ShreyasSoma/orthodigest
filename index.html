@@ -424,20 +424,20 @@
     <h1>OrthoDigest</h1>
     <p class="tagline">Essential research, deadlines &amp; opportunities — curated weekly.</p>
     <div class="stats">
-      <span>SUNDAY MORNINGS</span>
+      <span id="live-topic-stat">THIS WEEK: SPINE SURGERY</span>
       <span>~4 MIN READ</span>
       <span>FREE, ALWAYS</span>
     </div>
   </header>
 
-  <p class="clip-label">What lands in your inbox</p>
+  <p class="clip-label">From a recent issue</p>
 
   <div class="issue">
     <div class="issue-head">
       <span class="name">OrthoDigest</span>
       <span class="meta">SUN · 4 MIN READ</span>
     </div>
-    <p class="this-week">This week: <b>Hand &amp; Wrist Surgery</b></p>
+    <p class="this-week">Recent focus: <b>Hand &amp; Wrist Surgery</b></p>
 
     <div class="entry" style="--entry-color: var(--brand)">
       <span class="label">Recent Publication</span>
@@ -527,22 +527,22 @@
   </div>
 
   <div class="rotation">
-    <p class="clip-label">The rotation</p>
-    <div class="rotation-chips">
-      <span class="current">Bone Tumour &amp; Oncology</span>
-      <span>Spine Surgery</span>
-      <span>Sports Medicine</span>
-      <span>Total Hip Arthroplasty</span>
-      <span>Total Knee Arthroplasty</span>
-      <span>Shoulder &amp; Rotator Cuff</span>
-      <span>Foot &amp; Ankle</span>
-      <span>Hand &amp; Wrist</span>
-      <span>Paediatric Orthopaedics</span>
-      <span>Cartilage Repair &amp; Biologics</span>
-      <span>Revision Arthroplasty</span>
-      <span>Peripheral Nerve Surgery</span>
-      <span>Upper Extremity Trauma</span>
-      <span>Pelvic &amp; Acetabular Surgery</span>
+    <p class="clip-label">The rotation — <span id="rotation-status">this week: spine surgery</span></p>
+    <div class="rotation-chips" id="rotation-chips">
+      <span data-index="0">Spine Surgery</span>
+      <span data-index="1">Sports Medicine &amp; Ligament Reconstruction</span>
+      <span data-index="2">Total Hip Arthroplasty</span>
+      <span data-index="3">Total Knee Arthroplasty</span>
+      <span data-index="4">Shoulder &amp; Rotator Cuff</span>
+      <span data-index="5">Foot &amp; Ankle</span>
+      <span data-index="6">Hand &amp; Wrist</span>
+      <span data-index="7">Paediatric Orthopaedics</span>
+      <span data-index="8">Bone Tumour &amp; Oncology</span>
+      <span data-index="9">Cartilage Repair &amp; Biologics</span>
+      <span data-index="10">Revision Arthroplasty</span>
+      <span data-index="11">Peripheral Nerve Surgery</span>
+      <span data-index="12">Upper Extremity Trauma</span>
+      <span data-index="13">Pelvic &amp; Acetabular Surgery</span>
     </div>
   </div>
 
@@ -559,5 +559,57 @@
   </footer>
 
 </div>
+
+<script>
+  // Mirrors newsletter.py's get_this_weeks_topic(): ISO week number, mod the
+  // rotation length. Keeping this list and order in sync with
+  // SUBSPECIALTY_ROTATION in newsletter.py is a manual step (there's no
+  // shared source between this static page and the private automation repo) —
+  // update both together if the rotation ever changes.
+  var ROTATION_LABELS = [
+    "Spine Surgery",
+    "Sports Medicine & Ligament Reconstruction",
+    "Total Hip Arthroplasty",
+    "Total Knee Arthroplasty",
+    "Shoulder & Rotator Cuff",
+    "Foot & Ankle",
+    "Hand & Wrist",
+    "Paediatric Orthopaedics",
+    "Bone Tumour & Oncology",
+    "Cartilage Repair & Biologics",
+    "Revision Arthroplasty",
+    "Peripheral Nerve Surgery",
+    "Upper Extremity Trauma",
+    "Pelvic & Acetabular Surgery"
+  ];
+
+  function isoWeekNumber(date) {
+    // Standard ISO-8601 week-number algorithm — matches Python's
+    // date.isocalendar()[1] exactly (weeks start Monday, week 1 contains
+    // the year's first Thursday).
+    var d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+    var dayNum = d.getUTCDay() || 7;
+    d.setUTCDate(d.getUTCDate() + 4 - dayNum);
+    var yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+    return Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
+  }
+
+  (function updateCurrentTopic() {
+    var index = isoWeekNumber(new Date()) % ROTATION_LABELS.length;
+    var label = ROTATION_LABELS[index];
+
+    var stat = document.getElementById("live-topic-stat");
+    if (stat) stat.textContent = "THIS WEEK: " + label.toUpperCase();
+
+    var status = document.getElementById("rotation-status");
+    if (status) status.textContent = "this week: " + label;
+
+    var chips = document.querySelectorAll("#rotation-chips span");
+    chips.forEach(function (chip) {
+      chip.classList.toggle("current", Number(chip.dataset.index) === index);
+    });
+  })();
+</script>
+
 </body>
 </html>
