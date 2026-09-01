@@ -430,25 +430,25 @@
     </div>
   </header>
 
-  <p class="clip-label">From a recent issue</p>
+  <p class="clip-label" id="issue-clip-label">From a recent issue</p>
 
   <div class="issue">
     <div class="issue-head">
       <span class="name">OrthoDigest</span>
       <span class="meta">SUN · 4 MIN READ</span>
     </div>
-    <p class="this-week">Recent focus: <b>Hand &amp; Wrist Surgery</b></p>
+    <p class="this-week" id="issue-this-week">Recent focus: <b>Hand &amp; Wrist Surgery</b></p>
 
     <div class="entry" style="--entry-color: var(--brand)">
       <span class="label">Recent Publication</span>
-      <p class="title">Intermediate-Term Outcomes After Foveal TFCC Repair</p>
-      <p class="sub">The Journal of Hand Surgery</p>
+      <p class="title" id="issue-paper1-title">Intermediate-Term Outcomes After Foveal TFCC Repair</p>
+      <p class="sub" id="issue-paper1-sub">The Journal of Hand Surgery</p>
     </div>
 
     <div class="entry" style="--entry-color: var(--success)">
       <span class="label">High-Impact Study</span>
-      <p class="title">Endoscopic Release of the Carpal Tunnel: A Randomized Multicenter Study</p>
-      <p class="sub">The Journal of Hand Surgery <span class="badge">576 citations</span></p>
+      <p class="title" id="issue-paper2-title">Endoscopic Release of the Carpal Tunnel: A Randomized Multicenter Study</p>
+      <p class="sub" id="issue-paper2-sub">The Journal of Hand Surgery <span class="badge">576 citations</span></p>
     </div>
 
     <div class="entry" style="--entry-color: var(--amber)">
@@ -608,6 +608,51 @@
     chips.forEach(function (chip) {
       chip.classList.toggle("current", Number(chip.dataset.index) === index);
     });
+  })();
+
+  // Pull the real current issue from the actual newsletter run, published by
+  // OrthoNews's GitHub Actions workflow after each successful send. If the
+  // file isn't there yet (first deploy, or a fetch hiccup), this silently
+  // keeps the illustrative static example above rather than showing an error.
+  (function loadLatestIssue() {
+    fetch("latest_issue.json", { cache: "no-store" })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (data) {
+        if (!data) return;
+
+        var clipLabel = document.getElementById("issue-clip-label");
+        if (clipLabel) clipLabel.textContent = "From this week's real issue";
+
+        var thisWeek = document.getElementById("issue-this-week");
+        if (thisWeek && data.topic_display) {
+          thisWeek.innerHTML = "This week: <b></b>";
+          thisWeek.querySelector("b").textContent = data.topic_display;
+        }
+
+        function fillPaper(paper, titleId, subId) {
+          var titleEl = document.getElementById(titleId);
+          var subEl = document.getElementById(subId);
+          if (!paper || !titleEl || !subEl) return;
+
+          titleEl.textContent = paper.title || "";
+
+          subEl.textContent = "";
+          subEl.appendChild(document.createTextNode(paper.journal || ""));
+          if (typeof paper.citation_count === "number") {
+            var badge = document.createElement("span");
+            badge.className = "badge";
+            badge.textContent = paper.citation_count.toLocaleString() + " citations";
+            subEl.appendChild(document.createTextNode(" "));
+            subEl.appendChild(badge);
+          }
+        }
+
+        fillPaper(data.paper1, "issue-paper1-title", "issue-paper1-sub");
+        fillPaper(data.paper2, "issue-paper2-title", "issue-paper2-sub");
+      })
+      .catch(function () {
+        // No file yet or network hiccup — keep the static example as-is.
+      });
   })();
 </script>
 
