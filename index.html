@@ -1,0 +1,539 @@
+<title>OrthoDigest</title>
+<style>
+  :root {
+    --paper: #f5f8fa;
+    --paper-raised: #ffffff;
+    --ink: #1a2530;
+    --ink-soft: #4a5a68;
+    --ink-faint: #7c8b98;
+    --rule: #dbe3ea;
+    --brand: #1a5276;
+    --brand-ink: #0f3450;
+    --on-brand: #ffffff;
+    --success: #1e8449;
+    --amber: #c6740f;
+    --violet: #6c3483;
+    --slate: #3d6b8a;
+    --focus: #1a5276;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #0f1720;
+      --paper-raised: #16212c;
+      --ink: #e8edf1;
+      --ink-soft: #aebccb;
+      --ink-faint: #7c8b98;
+      --rule: #263442;
+      --brand: #6fa8d8;
+      --brand-ink: #a9cdea;
+      --on-brand: #0f1720;
+      --success: #4fbb7e;
+      --amber: #e0a34f;
+      --violet: #b98adf;
+      --slate: #7fa8c4;
+      --focus: #6fa8d8;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --paper: #0f1720;
+    --paper-raised: #16212c;
+    --ink: #e8edf1;
+    --ink-soft: #aebccb;
+    --ink-faint: #7c8b98;
+    --rule: #263442;
+    --brand: #6fa8d8;
+    --brand-ink: #a9cdea;
+    --on-brand: #0f1720;
+    --success: #4fbb7e;
+    --amber: #e0a34f;
+    --violet: #b98adf;
+    --slate: #7fa8c4;
+    --focus: #6fa8d8;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: Georgia, 'Times New Roman', serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 56px 24px 80px;
+  }
+
+  a { color: var(--brand); }
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 3px;
+  }
+
+  .eyebrow {
+    font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ── Masthead ─────────────────────────────────────────── */
+
+  .masthead {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-bottom: 22px;
+    border-bottom: 3px double var(--rule);
+    margin-bottom: 28px;
+  }
+
+  .masthead h1 {
+    font-family: 'Newsreader', Georgia, serif;
+    font-weight: 600;
+    font-size: clamp(40px, 8vw, 58px);
+    letter-spacing: -0.01em;
+    margin: 0;
+    color: var(--brand-ink);
+    text-wrap: balance;
+  }
+
+  .masthead .tagline {
+    font-size: 17px;
+    color: var(--ink-soft);
+    font-style: italic;
+    margin: 0;
+  }
+
+  .masthead .stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 18px;
+    margin-top: 8px;
+  }
+
+  .masthead .stats span {
+    font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+    font-size: 12px;
+    color: var(--ink-faint);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ── Preview clipping ─────────────────────────────────── */
+
+  .clip-label {
+    font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin: 0 0 10px;
+  }
+
+  .issue {
+    background: var(--paper-raised);
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    padding: 22px 24px 20px;
+    box-shadow: 0 1px 2px rgba(15, 23, 32, 0.04);
+    margin-bottom: 44px;
+  }
+
+  .issue-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-bottom: 2px solid var(--brand);
+    padding-bottom: 10px;
+    margin-bottom: 14px;
+  }
+
+  .issue-head .name {
+    font-family: 'Newsreader', Georgia, serif;
+    font-weight: 600;
+    font-size: 19px;
+    color: var(--brand-ink);
+  }
+
+  .issue-head .meta {
+    font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+    font-size: 11px;
+    color: var(--ink-faint);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .this-week {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin: 0 0 16px;
+  }
+
+  .this-week b { color: var(--ink); }
+
+  .entry {
+    border-left: 3px solid var(--entry-color, var(--brand));
+    padding: 3px 0 3px 14px;
+    margin-bottom: 14px;
+  }
+
+  .entry:last-child { margin-bottom: 0; }
+
+  .entry .label {
+    font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--entry-color, var(--brand));
+    display: block;
+    margin-bottom: 3px;
+  }
+
+  .entry .title {
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.35;
+    margin: 0 0 3px;
+  }
+
+  .entry .sub {
+    font-size: 12px;
+    color: var(--ink-faint);
+    margin: 0;
+  }
+
+  .entry .sub .badge {
+    display: inline-block;
+    font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+    font-size: 10px;
+    font-variant-numeric: tabular-nums;
+    background: color-mix(in srgb, var(--entry-color, var(--brand)) 14%, transparent);
+    color: var(--entry-color, var(--brand));
+    padding: 1px 6px;
+    border-radius: 8px;
+    margin-left: 6px;
+  }
+
+  /* ── Index of sections ────────────────────────────────── */
+
+  .index-head {
+    font-family: 'Newsreader', Georgia, serif;
+    font-size: 26px;
+    font-weight: 600;
+    margin: 0 0 4px;
+    color: var(--ink);
+  }
+
+  .index-sub {
+    font-size: 14px;
+    color: var(--ink-soft);
+    margin: 0 0 24px;
+    max-width: 52ch;
+  }
+
+  .index {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--rule);
+    margin-bottom: 48px;
+  }
+
+  .index-row {
+    display: grid;
+    grid-template-columns: 26px 1fr;
+    gap: 14px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .index-row .num {
+    font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+    font-size: 12px;
+    color: var(--row-color, var(--brand));
+    font-variant-numeric: tabular-nums;
+    padding-top: 2px;
+  }
+
+  .index-row h3 {
+    font-size: 15px;
+    margin: 0 0 4px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .index-row p {
+    font-size: 13.5px;
+    color: var(--ink-soft);
+    margin: 0;
+    line-height: 1.55;
+    max-width: 56ch;
+  }
+
+  /* ── Rotation strip ───────────────────────────────────── */
+
+  .rotation {
+    margin-bottom: 48px;
+  }
+
+  .rotation-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 14px;
+  }
+
+  .rotation-chips span {
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    background: var(--paper-raised);
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    padding: 5px 10px;
+  }
+
+  .rotation-chips span.current {
+    color: var(--brand-ink);
+    border-color: var(--brand);
+    font-weight: 700;
+  }
+
+  /* ── Facts row ─────────────────────────────────────────── */
+
+  .facts {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    margin-bottom: 48px;
+  }
+
+  .facts div {
+    background: var(--paper-raised);
+    padding: 18px 16px;
+  }
+
+  .facts .fact-num {
+    font-family: 'Newsreader', Georgia, serif;
+    font-size: 26px;
+    font-weight: 600;
+    color: var(--brand-ink);
+    display: block;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .facts .fact-label {
+    font-size: 12.5px;
+    color: var(--ink-soft);
+  }
+
+  /* ── CTA ──────────────────────────────────────────────── */
+
+  .cta {
+    text-align: center;
+    padding: 40px 24px;
+    background: var(--paper-raised);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    margin-bottom: 28px;
+  }
+
+  .cta h2 {
+    font-family: 'Newsreader', Georgia, serif;
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0 0 8px;
+    text-wrap: balance;
+  }
+
+  .cta p {
+    font-size: 14px;
+    color: var(--ink-soft);
+    margin: 0 0 22px;
+  }
+
+  .cta-button {
+    display: inline-block;
+    background: var(--brand);
+    color: var(--on-brand);
+    text-decoration: none;
+    font-family: Georgia, serif;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 13px 30px;
+    border-radius: 3px;
+    letter-spacing: 0.01em;
+  }
+
+  .cta-note {
+    margin-top: 14px;
+    font-size: 12px;
+    color: var(--ink-faint);
+  }
+
+  footer {
+    text-align: center;
+    font-size: 12px;
+    color: var(--ink-faint);
+    padding-top: 8px;
+  }
+
+  footer p { margin: 4px 0; }
+
+  @media (max-width: 520px) {
+    .facts { grid-template-columns: 1fr; }
+    .issue-head { flex-direction: column; align-items: flex-start; gap: 4px; }
+  }
+</style>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<div class="wrap">
+
+  <header class="masthead">
+    <h1>OrthoDigest</h1>
+    <p class="tagline">Essential research, deadlines &amp; opportunities — curated weekly.</p>
+    <div class="stats">
+      <span>SUNDAY MORNINGS</span>
+      <span>~4 MIN READ</span>
+      <span>FREE, ALWAYS</span>
+    </div>
+  </header>
+
+  <p class="clip-label">What lands in your inbox</p>
+
+  <div class="issue">
+    <div class="issue-head">
+      <span class="name">OrthoDigest</span>
+      <span class="meta">SUN · 4 MIN READ</span>
+    </div>
+    <p class="this-week">This week: <b>Hand &amp; Wrist Surgery</b></p>
+
+    <div class="entry" style="--entry-color: var(--brand)">
+      <span class="label">Recent Publication</span>
+      <p class="title">Intermediate-Term Outcomes After Foveal TFCC Repair</p>
+      <p class="sub">The Journal of Hand Surgery</p>
+    </div>
+
+    <div class="entry" style="--entry-color: var(--success)">
+      <span class="label">High-Impact Study</span>
+      <p class="title">Endoscopic Release of the Carpal Tunnel: A Randomized Multicenter Study</p>
+      <p class="sub">The Journal of Hand Surgery <span class="badge">576 citations</span></p>
+    </div>
+
+    <div class="entry" style="--entry-color: var(--amber)">
+      <span class="label">Upcoming Deadline</span>
+      <p class="title">Clinical Orthopaedic Society Annual Meeting</p>
+      <p class="sub">Abstract deadline in 12 days</p>
+    </div>
+
+    <div class="entry" style="--entry-color: var(--violet)">
+      <span class="label">Recent Fellowship Posting</span>
+      <p class="title">Research Fellowship — Center for Joint Preservation &amp; Replacement</p>
+      <p class="sub">Posted this week &middot; orthogate.org</p>
+    </div>
+
+    <div class="entry" style="--entry-color: var(--slate)">
+      <span class="label">Orthopaedic &amp; Medtech News</span>
+      <p class="title">Schöttle's Point Deviation Increases MPFL Reconstruction Failure</p>
+      <p class="sub">Healio Orthopaedics</p>
+    </div>
+  </div>
+
+  <h2 class="index-head">Five things, every Sunday</h2>
+  <p class="index-sub">No filler, no sponsored placements — just what actually moved this week, pulled straight from PubMed, real journals, and the boards trainees already watch.</p>
+
+  <div class="index">
+    <div class="index-row" style="--row-color: var(--brand)">
+      <span class="num">01</span>
+      <div>
+        <h3>Recent publication</h3>
+        <p>The newest paper on this week's rotating subspecialty, sourced directly from PubMed — no aggregator, no delay.</p>
+      </div>
+    </div>
+    <div class="index-row" style="--row-color: var(--success)">
+      <span class="num">02</span>
+      <div>
+        <h3>High-impact study</h3>
+        <p>An RCT or systematic review on the same subspecialty, ranked by real citation count via Semantic Scholar — not just whatever's newest.</p>
+      </div>
+    </div>
+    <div class="index-row" style="--row-color: var(--amber)">
+      <span class="num">03</span>
+      <div>
+        <h3>Upcoming deadlines</h3>
+        <p>Abstract and conference deadlines worth knowing about before they pass you by.</p>
+      </div>
+    </div>
+    <div class="index-row" style="--row-color: var(--violet)">
+      <span class="num">04</span>
+      <div>
+        <h3>Fellowship postings</h3>
+        <p>The most recent medical-student research and fellowship openings, with a link to the full board.</p>
+      </div>
+    </div>
+    <div class="index-row" style="--row-color: var(--slate)">
+      <span class="num">05</span>
+      <div>
+        <h3>Ortho &amp; medtech news</h3>
+        <p>What's actually happening in the field this week — devices, trials, and the stories your attendings are talking about.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="facts">
+    <div>
+      <span class="fact-num">14</span>
+      <span class="fact-label">rotating subspecialties</span>
+    </div>
+    <div>
+      <span class="fact-num">$0</span>
+      <span class="fact-label">cost, no catch</span>
+    </div>
+    <div>
+      <span class="fact-num">0</span>
+      <span class="fact-label">AI-written summaries</span>
+    </div>
+  </div>
+
+  <div class="rotation">
+    <p class="clip-label">The rotation</p>
+    <div class="rotation-chips">
+      <span class="current">Bone Tumour &amp; Oncology</span>
+      <span>Spine Surgery</span>
+      <span>Sports Medicine</span>
+      <span>Total Hip Arthroplasty</span>
+      <span>Total Knee Arthroplasty</span>
+      <span>Shoulder &amp; Rotator Cuff</span>
+      <span>Foot &amp; Ankle</span>
+      <span>Hand &amp; Wrist</span>
+      <span>Paediatric Orthopaedics</span>
+      <span>Cartilage Repair &amp; Biologics</span>
+      <span>Revision Arthroplasty</span>
+      <span>Peripheral Nerve Surgery</span>
+      <span>Upper Extremity Trauma</span>
+      <span>Pelvic &amp; Acetabular Surgery</span>
+    </div>
+  </div>
+
+  <div class="cta">
+    <h2>Get next Sunday's issue</h2>
+    <p>One email a week. Unsubscribe in one click, any time.</p>
+    <a class="cta-button" href="https://forms.gle/mwH9r2CERuYzHaUs7">Subscribe — it's free</a>
+    <p class="cta-note">No spam, no sponsored content, no catch.</p>
+  </div>
+
+  <footer>
+    <p>OrthoDigest — an independent weekly digest for orthopaedic students, residents &amp; surgeons.</p>
+    <p>Papers sourced from PubMed. Not affiliated with any journal, society, or institution.</p>
+  </footer>
+
+</div>
