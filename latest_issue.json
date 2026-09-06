@@ -1,0 +1,17 @@
+{
+  "topic": "bone tumour and oncology",
+  "topic_display": "Bone Tumour And Oncology",
+  "date": "September 06, 2026",
+  "paper1": {
+    "title": "Can Orthopaedic Oncologists Agree on What Is and Is Not a Pathologic Fracture?",
+    "journal": "Clinical orthopaedics and related research",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/42641000/",
+    "citation_count": null
+  },
+  "paper2": {
+    "title": "Enzalutamide with Standard First-Line Therapy in Metastatic Prostate Cancer.",
+    "journal": "The New England journal of medicine",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/31157964/",
+    "citation_count": 0
+  }
+}
