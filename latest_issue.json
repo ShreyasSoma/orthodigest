@@ -1,17 +1,17 @@
 {
-  "topic": "bone tumour and oncology",
-  "topic_display": "Bone Tumour And Oncology",
-  "date": "September 06, 2026",
+  "topic": "cartilage repair and biologics",
+  "topic_display": "Cartilage Repair And Biologics",
+  "date": "September 13, 2026",
   "paper1": {
-    "title": "Can Orthopaedic Oncologists Agree on What Is and Is Not a Pathologic Fracture?",
-    "journal": "Clinical orthopaedics and related research",
-    "url": "https://pubmed.ncbi.nlm.nih.gov/42641000/",
+    "title": "Coronal Alignment Changes in the Patellofemoral Joint Are Smaller Than Correction Angle and Have Little Impact on Clinical Scores and Cartilage Damage After Medial Open-Wedge High Tibial Osteotomy.",
+    "journal": "Arthroscopy : the journal of arthroscopic & related surgery : official publication of the Arthroscopy Association of North America and the International Arthroscopy Association",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/42712207/",
     "citation_count": null
   },
   "paper2": {
-    "title": "Enzalutamide with Standard First-Line Therapy in Metastatic Prostate Cancer.",
-    "journal": "The New England journal of medicine",
-    "url": "https://pubmed.ncbi.nlm.nih.gov/31157964/",
-    "citation_count": 0
+    "title": "Autologous chondrocyte implantation compared with microfracture in the knee. A randomized trial.",
+    "journal": "The Journal of bone and joint surgery. American volume",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/14996869/",
+    "citation_count": 1338
   }
 }
