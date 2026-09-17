@@ -27,6 +27,22 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@500;600;700&family=Karla:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
+<script>
+  // Set the theme before first paint, so there's no flash of the wrong
+  // theme while the rest of the page loads.
+  (function () {
+    try {
+      var saved = localStorage.getItem("orthodigest-theme");
+      if (saved === "light" || saved === "dark") {
+        document.documentElement.setAttribute("data-theme", saved);
+      }
+    } catch (e) {
+      // Private browsing / blocked storage — just fall through to the
+      // system prefers-color-scheme default.
+    }
+  })();
+</script>
+
 <style>
   :root {
     --paper: #f5f6f4;
@@ -141,6 +157,42 @@
       0% 98.5%
     );
   }
+
+  /* ── Theme toggle ─────────────────────────────────────── */
+
+  .theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 52px;
+    height: 28px;
+    padding: 0;
+    background: var(--paper-raised);
+    border: 1px solid var(--rule);
+    border-radius: 100px;
+    cursor: pointer;
+    z-index: 10;
+  }
+  .theme-toggle:hover { border-color: var(--ink-faint); }
+
+  .theme-toggle .thumb {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--brand);
+    color: var(--paper-raised);
+    font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+    font-size: 10px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 200ms ease;
+  }
+  .theme-toggle[data-mode="light"] .thumb { transform: translateX(24px); }
 
   /* ── Masthead ─────────────────────────────────────────── */
 
@@ -506,6 +558,10 @@
 </head>
 <body>
 
+<button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle dark mode" data-mode="light">
+  <span class="thumb" id="theme-toggle-thumb">L</span>
+</button>
+
 <div class="wrap">
 
   <header class="masthead" id="masthead">
@@ -649,6 +705,46 @@
 </div>
 
 <script>
+  // Theme toggle: cycles the explicit data-theme attribute between light and
+  // dark, persisted so it survives reloads. With no saved preference, the
+  // page falls back to the system prefers-color-scheme (handled entirely by
+  // the CSS media query — this script only runs once the user overrides it).
+  (function setUpThemeToggle() {
+    var btn = document.getElementById("theme-toggle");
+    if (!btn) return;
+
+    function systemPrefersDark() {
+      return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+    }
+
+    function currentTheme() {
+      var explicit = document.documentElement.getAttribute("data-theme");
+      if (explicit === "light" || explicit === "dark") return explicit;
+      return systemPrefersDark() ? "dark" : "light";
+    }
+
+    var thumb = document.getElementById("theme-toggle-thumb");
+
+    function updateSlider() {
+      var mode = currentTheme();
+      btn.setAttribute("data-mode", mode);
+      // The letter ON the thumb always names the active mode — no separate
+      // track labels to potentially sit under the thumb and get hidden.
+      if (thumb) thumb.textContent = mode === "dark" ? "D" : "L";
+      // aria-label names the mode a click will switch TO.
+      btn.setAttribute("aria-label", mode === "dark" ? "Switch to light mode" : "Switch to dark mode");
+    }
+
+    btn.addEventListener("click", function () {
+      var next = currentTheme() === "dark" ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", next);
+      try { localStorage.setItem("orthodigest-theme", next); } catch (e) {}
+      updateSlider();
+    });
+
+    updateSlider();
+  })();
+
   // Mirrors newsletter.py's get_this_weeks_topic(): ISO week number, mod the
   // rotation length. Keeping this list and order in sync with
   // SUBSPECIALTY_ROTATION in newsletter.py is a manual step (there's no
