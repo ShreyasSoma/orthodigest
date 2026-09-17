@@ -21,64 +21,67 @@
 <meta name="twitter:description" content="Recent papers, high-impact studies, conference deadlines, and fellowship postings — one free email every Sunday." />
 <meta name="twitter:image" content="https://shreyassoma.github.io/orthodigest/og-image.png" />
 
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A6%B4%3C/text%3E%3C/svg%3E" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23efece1'/%3E%3Ccircle cx='50' cy='50' r='40' fill='none' stroke='%23a8412f' stroke-width='4'/%3E%3Ctext x='50' y='65' font-family='Georgia,serif' font-size='38' font-weight='700' fill='%231f3b36' text-anchor='middle'%3EOD%3C/text%3E%3C/svg%3E" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@500;600;700&family=Karla:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
 <style>
   :root {
-    --paper: #f5f8fa;
+    --paper: #f5f6f4;
     --paper-raised: #ffffff;
-    --ink: #1a2530;
-    --ink-soft: #4a5a68;
-    --ink-faint: #7c8b98;
-    --rule: #dbe3ea;
-    --brand: #1a5276;
-    --brand-ink: #0f3450;
-    --on-brand: #ffffff;
-    --success: #1e8449;
-    --amber: #c6740f;
-    --violet: #6c3483;
-    --slate: #3d6b8a;
-    --focus: #1a5276;
+    --ink: #16283a;
+    --ink-soft: #47586a;
+    --ink-faint: #7d8b98;
+    --rule: #dde1e2;
+    --brand: #16283a;
+    --accent: #d9691c;
+    --secondary: #b6491a;
+    --tertiary: #6b7d4f;
+    --quaternary: #52606d;
+    --on-accent: #ffffff;
+    --focus: #d9691c;
+    --grain-blend: multiply;
+    --grain-opacity: 0.05;
   }
 
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
-      --paper: #0f1720;
-      --paper-raised: #16212c;
-      --ink: #e8edf1;
-      --ink-soft: #aebccb;
-      --ink-faint: #7c8b98;
-      --rule: #263442;
-      --brand: #6fa8d8;
-      --brand-ink: #a9cdea;
-      --on-brand: #0f1720;
-      --success: #4fbb7e;
-      --amber: #e0a34f;
-      --violet: #b98adf;
-      --slate: #7fa8c4;
-      --focus: #6fa8d8;
+      --paper: #10151c;
+      --paper-raised: #182230;
+      --ink: #eef1f4;
+      --ink-soft: #b7c2cc;
+      --ink-faint: #7d8b98;
+      --rule: #2a3644;
+      --brand: #86aed0;
+      --accent: #ff8f47;
+      --secondary: #e8845a;
+      --tertiary: #93a878;
+      --quaternary: #8fa0ad;
+      --on-accent: #1a1108;
+      --focus: #ff8f47;
+      --grain-blend: screen;
+      --grain-opacity: 0.045;
     }
   }
 
   :root[data-theme="dark"] {
-    --paper: #0f1720;
-    --paper-raised: #16212c;
-    --ink: #e8edf1;
-    --ink-soft: #aebccb;
-    --ink-faint: #7c8b98;
-    --rule: #263442;
-    --brand: #6fa8d8;
-    --brand-ink: #a9cdea;
-    --on-brand: #0f1720;
-    --success: #4fbb7e;
-    --amber: #e0a34f;
-    --violet: #b98adf;
-    --slate: #7fa8c4;
-    --focus: #6fa8d8;
+    --paper: #10151c;
+    --paper-raised: #182230;
+    --ink: #eef1f4;
+    --ink-soft: #b7c2cc;
+    --ink-faint: #7d8b98;
+    --rule: #2a3644;
+    --brand: #86aed0;
+    --accent: #ff8f47;
+    --secondary: #e8845a;
+    --tertiary: #93a878;
+    --quaternary: #8fa0ad;
+    --on-accent: #1a1108;
+    --focus: #ff8f47;
+    --grain-blend: screen;
+    --grain-opacity: 0.045;
   }
 
   * { box-sizing: border-box; }
@@ -87,7 +90,7 @@
     margin: 0;
     background: var(--paper);
     color: var(--ink);
-    font-family: Georgia, 'Times New Roman', serif;
+    font-family: 'Karla', -apple-system, 'Segoe UI', sans-serif;
     -webkit-font-smoothing: antialiased;
   }
 
@@ -103,6 +106,8 @@
     outline-offset: 3px;
   }
 
+  code { font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; }
+
   .eyebrow {
     font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace;
     font-size: 11px;
@@ -112,29 +117,73 @@
     font-variant-numeric: tabular-nums;
   }
 
+  /* ── grain + deckle utilities ─────────────────────────── */
+
+  .grain { position: relative; }
+  .grain::after {
+    content: "";
+    position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: var(--grain-opacity);
+    mix-blend-mode: var(--grain-blend);
+    pointer-events: none;
+  }
+
+  .deckle-bottom {
+    clip-path: polygon(
+      0% 0%, 100% 0%, 100% 95%,
+      96% 97.5%, 92% 95.5%, 88% 98.5%, 84% 96%,
+      80% 99%, 76% 96%, 72% 98.5%, 68% 96%,
+      64% 99%, 60% 96%, 56% 98.5%, 52% 96%,
+      48% 99%, 44% 96%, 40% 98.5%, 36% 96%,
+      32% 99%, 28% 96%, 24% 98.5%, 20% 96%,
+      16% 99%, 12% 96%, 8% 98.5%, 4% 96%,
+      0% 98.5%
+    );
+  }
+
   /* ── Masthead ─────────────────────────────────────────── */
 
   .masthead {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding-bottom: 22px;
-    border-bottom: 3px double var(--rule);
-    margin-bottom: 28px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 30px;
   }
 
+  .masthead .kicker {
+    font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin: 0 0 14px;
+  }
+
+  .masthead-wrap { position: relative; display: inline-block; margin-bottom: 24px; }
+
   .masthead h1 {
-    font-family: 'Newsreader', Georgia, serif;
+    font-family: 'Spectral', Georgia, 'Times New Roman', serif;
     font-weight: 600;
-    font-size: clamp(40px, 8vw, 58px);
+    font-size: clamp(38px, 8vw, 56px);
     letter-spacing: -0.01em;
     margin: 0;
-    color: var(--brand-ink);
+    color: var(--brand);
     text-wrap: balance;
   }
 
+  .masthead .squiggle {
+    position: absolute; left: -4px; bottom: -20px; width: calc(100% + 8px); height: 18px;
+  }
+  .masthead .squiggle path {
+    fill: none; stroke: var(--accent); stroke-width: 2; stroke-linecap: round; opacity: 0.8;
+    stroke-dasharray: 340; stroke-dashoffset: 340;
+    transition: stroke-dashoffset 1000ms cubic-bezier(.3,.7,.3,1);
+  }
+  .masthead.in-view .squiggle path { stroke-dashoffset: 0; }
+
   .masthead .tagline {
-    font-size: 17px;
+    font-family: 'Karla', sans-serif;
+    font-size: 16.5px;
     color: var(--ink-soft);
     font-style: italic;
     margin: 0;
@@ -144,33 +193,31 @@
     display: flex;
     flex-wrap: wrap;
     gap: 6px 18px;
-    margin-top: 8px;
+    margin-top: 14px;
   }
 
   .masthead .stats span {
     font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace;
-    font-size: 12px;
+    font-size: 11.5px;
     color: var(--ink-faint);
     font-variant-numeric: tabular-nums;
   }
 
-  /* ── Preview clipping ─────────────────────────────────── */
+  /* ── Issue preview (the "plate") ──────────────────────── */
 
-  .clip-label {
+  .plate-label {
     font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace;
     font-size: 11px;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--ink-faint);
+    color: var(--secondary);
     margin: 0 0 10px;
   }
 
   .issue {
     background: var(--paper-raised);
-    border: 1px solid var(--rule);
-    border-radius: 3px;
-    padding: 22px 24px 20px;
-    box-shadow: 0 1px 2px rgba(15, 23, 32, 0.04);
+    padding: 24px 26px 30px;
+    filter: drop-shadow(0 2px 4px rgba(31, 59, 54, 0.1));
     margin-bottom: 44px;
   }
 
@@ -180,14 +227,14 @@
     align-items: baseline;
     border-bottom: 2px solid var(--brand);
     padding-bottom: 10px;
-    margin-bottom: 14px;
+    margin-bottom: 16px;
   }
 
   .issue-head .name {
-    font-family: 'Newsreader', Georgia, serif;
+    font-family: 'Spectral', Georgia, serif;
     font-weight: 600;
     font-size: 19px;
-    color: var(--brand-ink);
+    color: var(--brand);
   }
 
   .issue-head .meta {
@@ -198,36 +245,51 @@
   }
 
   .this-week {
-    font-size: 13px;
+    font-size: 13.5px;
     color: var(--ink-soft);
-    margin: 0 0 16px;
+    margin: 0 0 18px;
   }
 
-  .this-week b { color: var(--ink); }
+  .this-week b { color: var(--ink); font-weight: 700; }
 
   .entry {
-    border-left: 3px solid var(--entry-color, var(--brand));
     padding: 3px 0 3px 14px;
-    margin-bottom: 14px;
+    margin-bottom: 16px;
+    border-left: 2px solid color-mix(in srgb, var(--entry-color, var(--brand)) 35%, transparent);
   }
 
   .entry:last-child { margin-bottom: 0; }
 
   .entry .label {
-    font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace;
-    font-size: 10px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    display: inline-block;
+    font-family: 'Karla', sans-serif;
+    font-style: italic;
+    font-size: 11px;
+    font-weight: 600;
     color: var(--entry-color, var(--brand));
-    display: block;
-    margin-bottom: 3px;
+    background: transparent;
+    border: 1px solid var(--entry-color, var(--brand));
+    border-radius: 2px;
+    padding: 2px 8px 2px 6px;
+    margin-bottom: 6px;
+  }
+
+  .entry .label::before {
+    content: "";
+    display: inline-block;
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: var(--entry-color, var(--brand));
+    margin-right: 5px;
+    vertical-align: middle;
   }
 
   .entry .title {
-    font-size: 14px;
+    font-size: 14.5px;
     font-weight: 700;
-    line-height: 1.35;
+    line-height: 1.4;
     margin: 0 0 3px;
+    font-family: 'Karla', sans-serif;
   }
 
   .entry .sub {
@@ -251,10 +313,10 @@
   /* ── Index of sections ────────────────────────────────── */
 
   .index-head {
-    font-family: 'Newsreader', Georgia, serif;
-    font-size: 26px;
+    font-family: 'Spectral', Georgia, serif;
+    font-size: 25px;
     font-weight: 600;
-    margin: 0 0 4px;
+    margin: 0 0 6px;
     color: var(--ink);
   }
 
@@ -263,6 +325,7 @@
     color: var(--ink-soft);
     margin: 0 0 24px;
     max-width: 52ch;
+    line-height: 1.55;
   }
 
   .index {
@@ -274,7 +337,7 @@
 
   .index-row {
     display: grid;
-    grid-template-columns: 26px 1fr;
+    grid-template-columns: 30px 1fr;
     gap: 14px;
     padding: 16px 0;
     border-bottom: 1px solid var(--rule);
@@ -289,6 +352,7 @@
   }
 
   .index-row h3 {
+    font-family: 'Karla', sans-serif;
     font-size: 15px;
     margin: 0 0 4px;
     font-weight: 700;
@@ -305,9 +369,7 @@
 
   /* ── Rotation strip ───────────────────────────────────── */
 
-  .rotation {
-    margin-bottom: 48px;
-  }
+  .rotation { margin-bottom: 48px; }
 
   .rotation-chips {
     display: flex;
@@ -317,16 +379,17 @@
   }
 
   .rotation-chips span {
+    font-family: 'Karla', sans-serif;
     font-size: 12.5px;
     color: var(--ink-soft);
     background: var(--paper-raised);
     border: 1px solid var(--rule);
-    border-radius: 3px;
+    border-radius: 2px;
     padding: 5px 10px;
   }
 
   .rotation-chips span.current {
-    color: var(--brand-ink);
+    color: var(--brand);
     border-color: var(--brand);
     font-weight: 700;
   }
@@ -348,15 +411,16 @@
   }
 
   .facts .fact-num {
-    font-family: 'Newsreader', Georgia, serif;
-    font-size: 26px;
+    font-family: 'Spectral', Georgia, serif;
+    font-size: 25px;
     font-weight: 600;
-    color: var(--brand-ink);
+    color: var(--brand);
     display: block;
     font-variant-numeric: tabular-nums;
   }
 
   .facts .fact-label {
+    font-family: 'Karla', sans-serif;
     font-size: 12.5px;
     color: var(--ink-soft);
   }
@@ -365,22 +429,22 @@
 
   .cta {
     text-align: center;
-    padding: 40px 24px;
+    padding: 42px 24px 34px;
     background: var(--paper-raised);
-    border: 1px solid var(--rule);
-    border-radius: 4px;
-    margin-bottom: 28px;
+    margin-bottom: 32px;
   }
 
   .cta h2 {
-    font-family: 'Newsreader', Georgia, serif;
-    font-size: 24px;
+    font-family: 'Spectral', Georgia, serif;
+    font-size: 23px;
     font-weight: 600;
     margin: 0 0 8px;
     text-wrap: balance;
+    color: var(--ink);
   }
 
   .cta p {
+    font-family: 'Karla', sans-serif;
     font-size: 14px;
     color: var(--ink-soft);
     margin: 0 0 22px;
@@ -388,31 +452,64 @@
 
   .cta-button {
     display: inline-block;
-    background: var(--brand);
-    color: var(--on-brand);
+    background: var(--accent);
+    color: var(--on-accent);
     text-decoration: none;
-    font-family: Georgia, serif;
+    font-family: 'Karla', sans-serif;
     font-size: 15px;
     font-weight: 700;
-    padding: 13px 30px;
-    border-radius: 3px;
+    padding: 13px 28px;
+    border-radius: 3px 10px 3px 10px;
     letter-spacing: 0.01em;
+    transition: transform 150ms ease;
   }
+
+  .cta-button:active { transform: scale(0.96) rotate(-1deg); }
 
   .cta-note {
-    margin-top: 14px;
+    margin-top: 16px;
+    font-family: 'Karla', sans-serif;
     font-size: 12px;
     color: var(--ink-faint);
   }
 
-  footer {
+  /* ── Colophon ─────────────────────────────────────────── */
+
+  .colophon {
     text-align: center;
-    font-size: 12px;
-    color: var(--ink-faint);
-    padding-top: 8px;
+    padding-top: 20px;
+    border-top: 1px solid var(--rule);
   }
 
-  footer p { margin: 4px 0; }
+  .colophon .mark {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin: 0 0 10px;
+  }
+
+  .colophon p {
+    font-family: 'Karla', sans-serif;
+    font-size: 12px;
+    color: var(--ink-faint);
+    margin: 4px 0;
+    line-height: 1.6;
+  }
+
+  /* ── Motion: the issue plate feels handled, not clicked ── */
+
+  .issue { transition: transform 260ms ease, filter 260ms ease; }
+  .issue:hover {
+    transform: translateY(-3px);
+    filter: drop-shadow(0 8px 14px rgba(31, 59, 54, 0.16));
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .masthead .squiggle path { transition: none; stroke-dashoffset: 0; }
+    .issue, .entry .label, .cta-button { transition: none; }
+  }
 
   @media (max-width: 520px) {
     .facts { grid-template-columns: 1fr; }
@@ -424,8 +521,14 @@
 
 <div class="wrap">
 
-  <header class="masthead">
-    <h1>OrthoDigest</h1>
+  <header class="masthead" id="masthead">
+    <p class="kicker">Field Notes — Orthopaedic Research, Weekly</p>
+    <span class="masthead-wrap">
+      <h1>OrthoDigest</h1>
+      <svg class="squiggle" viewBox="0 0 220 16" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M2,9 C 22,2 48,13 72,7 C 98,1 124,12 150,6 C 172,1 194,10 218,5" />
+      </svg>
+    </span>
     <p class="tagline">Essential research, deadlines &amp; opportunities — curated weekly.</p>
     <div class="stats">
       <span id="live-topic-stat">THIS WEEK: SPINE SURGERY</span>
@@ -434,9 +537,9 @@
     </div>
   </header>
 
-  <p class="clip-label" id="issue-clip-label">From a recent issue</p>
+  <p class="plate-label" id="plate-label">Plate — a recent issue</p>
 
-  <div class="issue">
+  <div class="issue grain deckle-bottom">
     <div class="issue-head">
       <span class="name">OrthoDigest</span>
       <span class="meta">SUN · 4 MIN READ</span>
@@ -449,25 +552,25 @@
       <p class="sub" id="issue-paper1-sub">The Journal of Hand Surgery</p>
     </div>
 
-    <div class="entry" style="--entry-color: var(--success)">
+    <div class="entry" style="--entry-color: var(--accent)">
       <span class="label">High-Impact Study</span>
       <p class="title" id="issue-paper2-title">Endoscopic Release of the Carpal Tunnel: A Randomized Multicenter Study</p>
       <p class="sub" id="issue-paper2-sub">The Journal of Hand Surgery <span class="badge">576 citations</span></p>
     </div>
 
-    <div class="entry" style="--entry-color: var(--amber)">
+    <div class="entry" style="--entry-color: var(--secondary)">
       <span class="label">Upcoming Deadline</span>
       <p class="title">Clinical Orthopaedic Society Annual Meeting</p>
       <p class="sub">Abstract deadline in 12 days</p>
     </div>
 
-    <div class="entry" style="--entry-color: var(--violet)">
+    <div class="entry" style="--entry-color: var(--tertiary)">
       <span class="label">Recent Fellowship Posting</span>
       <p class="title">Research Fellowship — Center for Joint Preservation &amp; Replacement</p>
       <p class="sub">Posted this week &middot; orthogate.org</p>
     </div>
 
-    <div class="entry" style="--entry-color: var(--slate)">
+    <div class="entry" style="--entry-color: var(--quaternary)">
       <span class="label">Orthopaedic &amp; Medtech News</span>
       <p class="title">Schöttle's Point Deviation Increases MPFL Reconstruction Failure</p>
       <p class="sub">Healio Orthopaedics</p>
@@ -485,28 +588,28 @@
         <p>The newest paper on this week's rotating subspecialty, sourced directly from PubMed — no aggregator, no delay.</p>
       </div>
     </div>
-    <div class="index-row" style="--row-color: var(--success)">
+    <div class="index-row" style="--row-color: var(--accent)">
       <span class="num">02</span>
       <div>
         <h3>High-impact study</h3>
         <p>An RCT or systematic review on the same subspecialty, ranked by real citation count via Semantic Scholar — not just whatever's newest.</p>
       </div>
     </div>
-    <div class="index-row" style="--row-color: var(--amber)">
+    <div class="index-row" style="--row-color: var(--secondary)">
       <span class="num">03</span>
       <div>
         <h3>Upcoming deadlines</h3>
         <p>Abstract and conference deadlines worth knowing about before they pass you by.</p>
       </div>
     </div>
-    <div class="index-row" style="--row-color: var(--violet)">
+    <div class="index-row" style="--row-color: var(--tertiary)">
       <span class="num">04</span>
       <div>
         <h3>Fellowship postings</h3>
         <p>The most recent medical-student research and fellowship openings, with a link to the full board.</p>
       </div>
     </div>
-    <div class="index-row" style="--row-color: var(--slate)">
+    <div class="index-row" style="--row-color: var(--quaternary)">
       <span class="num">05</span>
       <div>
         <h3>Ortho &amp; medtech news</h3>
@@ -525,13 +628,13 @@
       <span class="fact-label">cost, no catch</span>
     </div>
     <div>
-      <span class="fact-num">0</span>
-      <span class="fact-label">AI-written summaries</span>
+      <span class="fact-num" id="fact-plate-num">38</span>
+      <span class="fact-label">this week's plate number</span>
     </div>
   </div>
 
   <div class="rotation">
-    <p class="clip-label">The rotation — <span id="rotation-status">this week: spine surgery</span></p>
+    <p class="plate-label">The rotation — <span id="rotation-status">this week: spine surgery</span></p>
     <div class="rotation-chips" id="rotation-chips">
       <span data-index="0">Spine Surgery</span>
       <span data-index="1">Sports Medicine &amp; Ligament Reconstruction</span>
@@ -550,15 +653,16 @@
     </div>
   </div>
 
-  <div class="cta">
+  <div class="cta grain">
     <h2>Get next Sunday's issue</h2>
     <p>One email a week. Unsubscribe in one click, any time.</p>
-    <a class="cta-button" href="https://forms.gle/mwH9r2CERuYzHaUs7">Subscribe — it's free</a>
+    <a class="cta-button" href="https://forms.gle/mwH9r2CERuYzHaUs7">Add yourself to the collection</a>
     <p class="cta-note">No spam, no sponsored content, no catch.</p>
   </div>
 
-  <footer>
-    <p>OrthoDigest — an independent weekly digest for orthopaedic students, residents &amp; surgeons.</p>
+  <footer class="colophon">
+    <p class="mark">OrthoDigest</p>
+    <p>An independent weekly digest for orthopaedic students, residents &amp; surgeons.</p>
     <p>Papers sourced from PubMed. Not affiliated with any journal, society, or institution.</p>
   </footer>
 
@@ -598,8 +702,15 @@
     return Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
   }
 
+  var currentWeekNumber = isoWeekNumber(new Date());
+
+  (function updatePlateNumber() {
+    var plateNum = document.getElementById("fact-plate-num");
+    if (plateNum) plateNum.textContent = currentWeekNumber;
+  })();
+
   (function updateCurrentTopic() {
-    var index = isoWeekNumber(new Date()) % ROTATION_LABELS.length;
+    var index = currentWeekNumber % ROTATION_LABELS.length;
     var label = ROTATION_LABELS[index];
 
     var stat = document.getElementById("live-topic-stat");
@@ -619,13 +730,15 @@
   // file isn't there yet (first deploy, or a fetch hiccup), this silently
   // keeps the illustrative static example above rather than showing an error.
   (function loadLatestIssue() {
+    var plateLabel = document.getElementById("plate-label");
+    if (plateLabel) plateLabel.textContent = "Plate " + currentWeekNumber + " — a recent issue";
+
     fetch("latest_issue.json", { cache: "no-store" })
       .then(function (r) { return r.ok ? r.json() : null; })
       .then(function (data) {
         if (!data) return;
 
-        var clipLabel = document.getElementById("issue-clip-label");
-        if (clipLabel) clipLabel.textContent = "From this week's real issue";
+        if (plateLabel) plateLabel.textContent = "Plate " + currentWeekNumber + " — this week's issue";
 
         var thisWeek = document.getElementById("issue-this-week");
         if (thisWeek && data.topic_display) {
@@ -657,6 +770,24 @@
       .catch(function () {
         // No file yet or network hiccup — keep the static example as-is.
       });
+  })();
+
+  // Hand-drawn masthead underline draws itself once, the first time it's
+  // in view (which for most visitors is immediately on load, since it's
+  // the page's first element).
+  (function drawMastheadMark() {
+    var el = document.getElementById("masthead");
+    if (!el) return;
+    if (!("IntersectionObserver" in window)) { el.classList.add("in-view"); return; }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          el.classList.add("in-view");
+          io.unobserve(el);
+        }
+      });
+    }, { threshold: 0.3 });
+    io.observe(el);
   })();
 </script>
 
