@@ -1,18 +1,18 @@
 {
-  "topic": "revision joint arthroplasty",
-  "topic_display": "Revision Joint Arthroplasty",
-  "date": "September 20, 2026",
+  "topic": "orthobiologics",
+  "topic_display": "Orthobiologics",
+  "date": "September 27, 2026",
   "paper1": {
-    "title": "Quantifying the Age-Dependent Risk of Periprosthetic Femoral Fracture Following Cementless Total Hip Arthroplasty: An Analysis using Age as a Continuous Variable.",
-    "journal": "The Journal of arthroplasty",
-    "url": "https://pubmed.ncbi.nlm.nih.gov/42744007/",
+    "title": "Biomaterial-mediated blood clot formation: a key to unlocking osteogenic synergy for bone regeneration.",
+    "journal": "Bone research",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/42786184/",
     "citation_count": null
   },
   "paper2": {
-    "title": "Range of motion of standard and high-flexion posterior stabilized total knee prostheses. A prospective, randomized study.",
-    "journal": "The Journal of bone and joint surgery. American volume",
-    "url": "https://pubmed.ncbi.nlm.nih.gov/15995113/",
-    "citation_count": 292
+    "title": "Ageing and the pathogenesis of osteoarthritis.",
+    "journal": "Nature reviews. Rheumatology",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/27192932/",
+    "citation_count": 1178
   },
   "subscriber_count": 37
 }
