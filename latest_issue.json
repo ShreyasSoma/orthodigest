@@ -1,17 +1,17 @@
 {
-  "topic": "orthobiologics",
-  "topic_display": "Orthobiologics",
-  "date": "September 27, 2026",
+  "topic": "spine surgery",
+  "topic_display": "Spine Surgery",
+  "date": "October 04, 2026",
   "paper1": {
-    "title": "Biomaterial-mediated blood clot formation: a key to unlocking osteogenic synergy for bone regeneration.",
-    "journal": "Bone research",
-    "url": "https://pubmed.ncbi.nlm.nih.gov/42786184/",
+    "title": "Pelvic fixation in pediatric spinal fusion for neuromuscular scoliosis is associated with increased short-term complications but comparable long-term outcomes.",
+    "journal": "Journal of pediatric orthopedics. Part B",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/42370873/",
     "citation_count": null
   },
   "paper2": {
-    "title": "Ageing and the pathogenesis of osteoarthritis.",
-    "journal": "Nature reviews. Rheumatology",
-    "url": "https://pubmed.ncbi.nlm.nih.gov/27192932/",
+    "title": "Evaluation of specific stabilizing exercise in the treatment of chronic low back pain with radiologic diagnosis of spondylolysis or spondylolisthesis.",
+    "journal": "Spine",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/9431633/",
     "citation_count": 1178
   },
   "subscriber_count": 37
