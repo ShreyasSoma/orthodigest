@@ -1,18 +1,18 @@
 {
-  "topic": "sports medicine",
-  "topic_display": "Sports Medicine",
-  "date": "October 11, 2026",
+  "topic": "total joints",
+  "topic_display": "Total Joints",
+  "date": "October 18, 2026",
   "paper1": {
-    "title": "Evolving Management Strategies for Osteochondral Lesions of the Talus: A Contemporary Treatment Algorithm.",
-    "journal": "The Journal of bone and joint surgery. American volume",
-    "url": "https://pubmed.ncbi.nlm.nih.gov/42853905/",
+    "title": "Preoperative Selective Serotonin Reuptake Inhibitor Use is Associated With Increased Complication Risk After Total Hip Arthroplasty: A Dose-Response Analysis.",
+    "journal": "The Journal of arthroplasty",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/42887707/",
     "citation_count": null
   },
   "paper2": {
-    "title": "A randomized comparison of patellar tendon and hamstring tendon anterior cruciate ligament reconstruction.",
-    "journal": "The American journal of sports medicine",
-    "url": "https://pubmed.ncbi.nlm.nih.gov/12860546/",
-    "citation_count": 532
+    "title": "Total Hip Arthroplasty or Hemiarthroplasty for Hip Fracture.",
+    "journal": "The New England journal of medicine",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/31557429/",
+    "citation_count": null
   },
   "subscriber_count": 37
 }
