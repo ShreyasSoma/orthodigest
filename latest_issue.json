@@ -1,17 +1,17 @@
 {
-  "topic": "total joints",
-  "topic_display": "Total Joints",
-  "date": "October 18, 2026",
+  "topic": "shoulder and elbow",
+  "topic_display": "Shoulder and Elbow",
+  "date": "October 25, 2026",
   "paper1": {
-    "title": "Preoperative Selective Serotonin Reuptake Inhibitor Use is Associated With Increased Complication Risk After Total Hip Arthroplasty: A Dose-Response Analysis.",
-    "journal": "The Journal of arthroplasty",
-    "url": "https://pubmed.ncbi.nlm.nih.gov/42887707/",
+    "title": "Polyethylene glenospheres in reverse total shoulder arthroplasty have greater long-term implant survivorship than metallic glenospheres: A New Zealand Joint Registry Study.",
+    "journal": "Journal of shoulder and elbow surgery",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/42918537/",
     "citation_count": null
   },
   "paper2": {
-    "title": "Total Hip Arthroplasty or Hemiarthroplasty for Hip Fracture.",
-    "journal": "The New England journal of medicine",
-    "url": "https://pubmed.ncbi.nlm.nih.gov/31557429/",
+    "title": "Effect of instrument-assisted soft tissue mobilization in addition to conventional rehabilitation on pain, range of motion, and functional level in patients with arthroscopic rotator cuff repair: a randomized controlled trial.",
+    "journal": "Journal of shoulder and elbow surgery",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/40412751/",
     "citation_count": null
   },
   "subscriber_count": 37
