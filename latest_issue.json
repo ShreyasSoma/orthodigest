@@ -1,18 +1,18 @@
 {
-  "topic": "shoulder and elbow",
-  "topic_display": "Shoulder and Elbow",
-  "date": "October 25, 2026",
+  "topic": "foot and ankle surgery",
+  "topic_display": "Foot and Ankle Surgery",
+  "date": "November 01, 2026",
   "paper1": {
-    "title": "Polyethylene glenospheres in reverse total shoulder arthroplasty have greater long-term implant survivorship than metallic glenospheres: A New Zealand Joint Registry Study.",
-    "journal": "Journal of shoulder and elbow surgery",
-    "url": "https://pubmed.ncbi.nlm.nih.gov/42918537/",
+    "title": "Consensus guidelines in the management of paediatric flexible flatfoot : a Delphi study of the British Society of Children's Orthopaedic Surgery.",
+    "journal": "The bone & joint journal",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/42966370/",
     "citation_count": null
   },
   "paper2": {
-    "title": "Effect of instrument-assisted soft tissue mobilization in addition to conventional rehabilitation on pain, range of motion, and functional level in patients with arthroscopic rotator cuff repair: a randomized controlled trial.",
-    "journal": "Journal of shoulder and elbow surgery",
-    "url": "https://pubmed.ncbi.nlm.nih.gov/40412751/",
-    "citation_count": null
+    "title": "Surgical and non-surgical treatment of Achilles Tendon rupture. A prospective randomized study.",
+    "journal": "The Journal of bone and joint surgery. American volume",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/7204438/",
+    "citation_count": 535
   },
   "subscriber_count": 37
 }
