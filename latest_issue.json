@@ -1,18 +1,18 @@
 {
-  "topic": "foot and ankle surgery",
-  "topic_display": "Foot and Ankle Surgery",
-  "date": "November 01, 2026",
+  "topic": "hand and wrist surgery",
+  "topic_display": "Hand and Wrist Surgery",
+  "date": "November 08, 2026",
   "paper1": {
-    "title": "Consensus guidelines in the management of paediatric flexible flatfoot : a Delphi study of the British Society of Children's Orthopaedic Surgery.",
-    "journal": "The bone & joint journal",
-    "url": "https://pubmed.ncbi.nlm.nih.gov/42966370/",
+    "title": "Pediatric flexor tendon injuries: A 13-year retrospective review of injury characteristics, treatment, and outcomes.",
+    "journal": "Injury",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/42970960/",
     "citation_count": null
   },
   "paper2": {
-    "title": "Surgical and non-surgical treatment of Achilles Tendon rupture. A prospective randomized study.",
-    "journal": "The Journal of bone and joint surgery. American volume",
-    "url": "https://pubmed.ncbi.nlm.nih.gov/7204438/",
-    "citation_count": 535
+    "title": "Flexor tendon repair rehabilitation protocols: a systematic review.",
+    "journal": "The Journal of hand surgery",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/23981421/",
+    "citation_count": null
   },
   "subscriber_count": 37
 }
