@@ -1,18 +1,18 @@
 {
-  "topic": "hand and wrist surgery",
-  "topic_display": "Hand and Wrist Surgery",
-  "date": "November 08, 2026",
+  "topic": "paediatric orthopaedics",
+  "topic_display": "Paediatric Orthopaedics",
+  "date": "November 15, 2026",
   "paper1": {
-    "title": "Pediatric flexor tendon injuries: A 13-year retrospective review of injury characteristics, treatment, and outcomes.",
-    "journal": "Injury",
-    "url": "https://pubmed.ncbi.nlm.nih.gov/42970960/",
+    "title": "Barriers to recruitment in paediatric orthopaedic surgical trials : a qualitative study embedded in the Big BOSS trial.",
+    "journal": "The bone & joint journal",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/42966372/",
     "citation_count": null
   },
   "paper2": {
-    "title": "Flexor tendon repair rehabilitation protocols: a systematic review.",
-    "journal": "The Journal of hand surgery",
-    "url": "https://pubmed.ncbi.nlm.nih.gov/23981421/",
-    "citation_count": null
+    "title": "A meta-analysis of the efficacy of non-operative treatments for idiopathic scoliosis.",
+    "journal": "The Journal of bone and joint surgery. American volume",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/9160938/",
+    "citation_count": 414
   },
   "subscriber_count": 37
 }
