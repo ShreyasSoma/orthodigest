@@ -1,18 +1,18 @@
 {
-  "topic": "paediatric orthopaedics",
-  "topic_display": "Paediatric Orthopaedics",
-  "date": "November 15, 2026",
+  "topic": "bone tumour and oncology",
+  "topic_display": "Bone Tumour and Oncology",
+  "date": "November 22, 2026",
   "paper1": {
-    "title": "Barriers to recruitment in paediatric orthopaedic surgical trials : a qualitative study embedded in the Big BOSS trial.",
+    "title": "Outcomes of a long modular uncemented femoral stem for reconstruction in metastatic femoral disease.",
     "journal": "The bone & joint journal",
-    "url": "https://pubmed.ncbi.nlm.nih.gov/42966372/",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/42966365/",
     "citation_count": null
   },
   "paper2": {
-    "title": "A meta-analysis of the efficacy of non-operative treatments for idiopathic scoliosis.",
-    "journal": "The Journal of bone and joint surgery. American volume",
-    "url": "https://pubmed.ncbi.nlm.nih.gov/9160938/",
-    "citation_count": 414
+    "title": "Addition of ifosfamide and etoposide to standard chemotherapy for Ewing's sarcoma and primitive neuroectodermal tumor of bone.",
+    "journal": "The New England journal of medicine",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/12594313/",
+    "citation_count": 1255
   },
   "subscriber_count": 37
 }
